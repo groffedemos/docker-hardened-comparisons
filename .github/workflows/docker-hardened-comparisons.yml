@@ -9,10 +9,10 @@ on:
   workflow_dispatch:
 
 env:
-  COMMON_IMAGE: 'python:3.13'
-  DOCKER_HARDENED_IMAGE: 'dhi.io/python:3.13'
-  #COMMON_IMAGE: 'mcr.microsoft.com/dotnet/sdk:10.0.101'
-  #DOCKER_HARDENED_IMAGE: 'dhi.io/dotnet:10.0.101-sdk'
+  #COMMON_IMAGE: 'python:3.13'
+  #DOCKER_HARDENED_IMAGE: 'dhi.io/python:3.13'
+  COMMON_IMAGE: 'mcr.microsoft.com/dotnet/sdk:10.0.101'
+  DOCKER_HARDENED_IMAGE: 'dhi.io/dotnet:10.0.101-sdk'
   #COMMON_IMAGE: 'node:24'
   #DOCKER_HARDENED_IMAGE: 'dhi.io/node:24'
   #COMMON_IMAGE: 'golang:1.24'
