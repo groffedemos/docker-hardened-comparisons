@@ -9,10 +9,10 @@ on:
   workflow_dispatch:
 
 env:
-  #COMMON_IMAGE: 'python:3.13'
-  #DOCKER_HARDENED_IMAGE: 'dhi.io/python:3.13'
-  COMMON_IMAGE: 'mcr.microsoft.com/dotnet/sdk:10.0.101'
-  DOCKER_HARDENED_IMAGE: 'dhi.io/dotnet:10.0.101-sdk'
+  COMMON_IMAGE: 'python:3.13'
+  DOCKER_HARDENED_IMAGE: 'dhi.io/python:3.13'
+  #COMMON_IMAGE: 'mcr.microsoft.com/dotnet/sdk:10.0.101'
+  #DOCKER_HARDENED_IMAGE: 'dhi.io/dotnet:10.0.101-sdk'
   #COMMON_IMAGE: 'node:24'
   #DOCKER_HARDENED_IMAGE: 'dhi.io/node:24'
   #COMMON_IMAGE: 'golang:1.24'
@@ -52,9 +52,6 @@ jobs:
 
       - name: Testing the Docker Scout installation -- Testar instalacao do Docker Scout
         run: docker scout
-
-      - name: Display options for the *docker scout compare* command. -- Exibir opcoes para o comando *docker scout compare*
-        run: docker scout compare --help
         
       - name: Perform a comparison between images -- Executar comparativo entre imagens
         run: |
@@ -62,24 +59,3 @@ jobs:
               --to ${{ env.COMMON_IMAGE }} \
               --platform linux/amd64 \
               --ignore-unchanged
-              
-      - name: Perform image comparisons and export results to Markdown -- Executar comparativo entre imagens exportando resultados para Markdown
-        run: |
-          docker scout compare ${{ env.DOCKER_HARDENED_IMAGE }} \
-              --to ${{ env.COMMON_IMAGE }} \
-              --format markdown --output scan-image.md \
-              --platform linux/amd64 \
-              --ignore-unchanged
-
-      - name: Display files in the root directory after running Docker Scout -- Exibir arquivos no diretorio-raiz apos execucao do Docker Scout
-        run: |
-          pwd
-          echo
-          ls -l
-          
-      - name: Publication of Markdown report -- Publicacao de relatorio Markdown
-        uses: dtinth/markdown-report-action@v1
-        with:
-          name: 'Docker Hardened Image x Common Image'
-          title: 'Docker Hardened Image x Common Image'
-          body-file: 'scan-image.md'
